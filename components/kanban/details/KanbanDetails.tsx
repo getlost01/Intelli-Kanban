@@ -12,6 +12,9 @@ import KanbanDetailsToolbar from './KanbanDetailsToolbar';
 import KanbanContactsDialog from '../KanbanContactsDialog';
 import KanbanDetailsPrioritizes from './KanbanDetailsPrioritizes';
 import KanbanDetailsCommentInput from './KanbanDetailsCommentInput';
+// redux
+import { useDispatch, useSelector } from '../../../redux/store';
+import { marksAsComplete , updateCard } from '../../../redux/slices/kanban';
 
 // ----------------------------------------------------------------------
 
@@ -25,26 +28,27 @@ const StyledLabel = styled('span')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 type Props = {
-  task: IKanbanCard;
+  card: IKanbanCard;
   openDetails: boolean;
   onCloseDetails: VoidFunction;
   onDeleteTask: VoidFunction;
 };
 
-export default function KanbanDetails({ task, openDetails, onCloseDetails, onDeleteTask }: Props) {
+export default function KanbanDetails({ card, openDetails, onCloseDetails, onDeleteTask }: Props) {
+  const dispatch = useDispatch();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [liked, setLiked] = useState(false);
 
   const [prioritize, setPrioritize] = useState('low');
 
-  const [taskName, setTaskName] = useState(task.name);
+  const [taskName, setTaskName] = useState(card.name);
 
   const [openContacts, setOpenContacts] = useState(false);
 
-  const [completed, setCompleted] = useState(task.completed);
+  const [completed, setCompleted] = useState(card.completed);
 
-  const [taskDescription, setTaskDescription] = useState(task.description);
+  const [taskDescription, setTaskDescription] = useState(card.description);
 
 
   const handleLiked = () => {
@@ -52,6 +56,7 @@ export default function KanbanDetails({ task, openDetails, onCloseDetails, onDel
   };
 
   const handleCompleted = () => {
+    dispatch(marksAsComplete({card}));
     setCompleted(!completed);
   };
 
@@ -68,6 +73,7 @@ export default function KanbanDetails({ task, openDetails, onCloseDetails, onDel
   };
 
   const handleChangeTaskName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateCard({card, taskName: event.target.value}));
     setTaskName(event.target.value);
   };
 
@@ -94,7 +100,7 @@ export default function KanbanDetails({ task, openDetails, onCloseDetails, onDel
       }}
     >
       <KanbanDetailsToolbar
-        taskName={task.name}
+        taskName={card.name}
         fileInputRef={fileInputRef}
         liked={liked}
         completed={completed}
@@ -120,7 +126,7 @@ export default function KanbanDetails({ task, openDetails, onCloseDetails, onDel
             <StyledLabel sx={{ height: 40, lineHeight: '40px', my: 0.5 }}>Assignee</StyledLabel>
 
             <Stack direction="row" flexWrap="wrap" alignItems="center">
-              {task.assignee.map((user) => (
+              {card.assignee.map((user) => (
                 <Avatar key={user.id} alt={user.name} src={user.avatar} sx={{ m: 0.5 }} />
               ))}
 
@@ -139,7 +145,7 @@ export default function KanbanDetails({ task, openDetails, onCloseDetails, onDel
               </Tooltip>
 
               <KanbanContactsDialog
-                assignee={task.assignee}
+                assignee={card.assignee}
                 open={openContacts}
                 onClose={handleCloseContacts}
               />
