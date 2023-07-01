@@ -2,6 +2,12 @@
   "name": "intelli-kanban",
   "version": "0.1.0",
   "private": true,
+  "author": "Aagam Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getlost01/Intelli-Kanban/issues"
+  },
+  "homepage": "https://github.com/getlost01/Intelli-Kanban#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +17,10 @@
   "dependencies": {
     "next": "13.4.7",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "@iconify/react": "^4.0.0",
+    "@mui/lab": "^5.0.0-alpha.109",
+    "@mui/material": "^5.10.15"
   },
   "devDependencies": {
     "@types/node": "20.3.3",
