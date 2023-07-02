@@ -65,4 +65,6 @@ const CustomAvatar = forwardRef<HTMLDivElement, CustomAvatarProps>(
   }
 );
 
+CustomAvatar.displayName = 'CustomAvatar';
+
 export default CustomAvatar;

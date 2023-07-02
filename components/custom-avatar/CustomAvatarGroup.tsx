@@ -79,4 +79,6 @@ const CustomAvatarGroup = forwardRef<HTMLDivElement, CustomAvatarGroupProps>(
   }
 );
 
+CustomAvatarGroup.displayName = 'CustomAvatarGroup';
+
 export default CustomAvatarGroup;
