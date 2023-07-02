@@ -216,82 +216,29 @@ const NAV_ITEMS = [
     items: [
       {
         title: 'Github',
-        path: '#',
+        path: 'https://github.com/getlost01',
         icon: <Iconify icon="bi:github" />,
       },
       {
         title: 'Linkedin',
-        path: '#',
+        path: 'https://www.linkedin.com/in/aagam-jain-gl01/',
         icon: <Iconify icon="circum:linkedin" />,
       },
       {
-        title: 'Case Studies',
+        title: 'Fork',
         path: '#',
-        icon: <Iconify icon="carbon:3d-cursor-alt" />,
+        icon: <Iconify icon="carbon:fork" />,
         children: [
-          { title: 'Case Studies', path: '#' },
-          { title: 'Case Study', path: '#' },
+          { title: 'Frontend', path: 'https://github.com/getlost01/Intelli-Kanban' },
+          { title: 'Backend', path: 'https://github.com/getlost01/intelli-kanban-backend' },
         ],
       },
       {
-        title: 'Blog',
-        path: '#',
-        icon: <Iconify icon="carbon:3d-mpr-toggle" />,
-        children: [
-          { title: 'Blog Posts', path: '#' },
-          { title: 'Blog Post', path: '#' },
-        ],
+        title: 'Logout',
+        path: '/logout',
+        icon: <Iconify icon="ic:outline-logout" />,
       },
-      {
-        title: 'About',
-        path: '#',
-        icon: <Iconify icon="carbon:airport-01" />,
-      },
-      {
-        title: 'Contact',
-        path: '#',
-        icon: <Iconify icon="carbon:battery-full" />,
-      },
-      {
-        title: 'Tours',
-        path: '#',
-        icon: <Iconify icon="carbon:basketball" />,
-        children: [
-          { title: 'Tours', path: '#' },
-          { title: 'Tour', path: '#' },
-        ],
-      },
-      {
-        title: 'Checkout',
-        path: '#',
-        icon: <Iconify icon="carbon:area" />,
-        children: [
-          { title: 'Checkout', path: '#' },
-          { title: 'Checkout Complete', path: '#' },
-        ],
-      },
+
     ],
-  },
-  {
-    subheader: 'Travel',
-    items: [
-      {
-        title: 'Level 1',
-        path: '#',
-        icon: <Iconify icon="carbon:play" />,
-        children: [
-          { title: 'Level 2.1', path: '#' },
-          { title: 'Level 2.2', path: '#' },
-          {
-            title: 'Level 2.3',
-            path: '#',
-            children: [
-              { title: 'Level 3.1', path: '#' },
-              { title: 'Level 3.2', path: '#' },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+  }
 ];
