@@ -49,6 +49,7 @@ export type IKanbanBoard = {
 export type IKanbanState = {
   isLoading: boolean;
   error: Error | string | null;
+  boardId: string | null;
   board: {
     cards: Record<string, IKanbanCard>;
     columns: Record<string, IKanbanColumn>;

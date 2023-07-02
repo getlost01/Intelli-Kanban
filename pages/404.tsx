@@ -46,7 +46,7 @@ export default function Page404() {
         </m.div>
 
         <Grid justifyContent={"center"} display={"flex"}>
-          <Button component={NextLink} href="/" size="large" sx={{width: "10rem"}} variant="contained">
+          <Button component={NextLink} href="/login" size="large" sx={{width: "10rem"}} variant="contained">
             Go to Home
           </Button>
         </Grid>

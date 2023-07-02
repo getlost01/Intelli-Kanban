@@ -12,6 +12,7 @@ import { IKanbanState, IKanbanCard, IKanbanColumn } from '../../@types/kanban';
 const initialState: IKanbanState = {
   isLoading: false,
   error: null,
+  boardId: null,
   board: {
     cards: {},
     columns: {},
@@ -26,6 +27,10 @@ const slice = createSlice({
     // START LOADING
     startLoading(state) {
       state.isLoading = true;
+    },
+
+    setBoardId(state, action) {
+      state.boardId = action.payload;
     },
 
     stopLoading(state) {
@@ -71,6 +76,7 @@ const slice = createSlice({
 
     persistColumn(state, action) {
       state.board.columnOrder = action.payload;
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
 
     addTask(state, action) {
@@ -78,6 +84,7 @@ const slice = createSlice({
 
       state.board.cards[card.id] = card;
       state.board.columns[columnId].cardIds.push(card.id);
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
 
     deleteTask(state, action) {
@@ -137,6 +144,7 @@ export function getBoard(kanbanId: string) {;
     try {
       const response = await axios.get(`api/board/${kanbanId}`);
       dispatch(slice.actions.getBoardSuccess(response.data.boarddata.board));
+      dispatch(slice.actions.setBoardId(response.data.boarddata.id));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     } finally {

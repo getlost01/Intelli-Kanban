@@ -155,7 +155,7 @@ export default function KanbanPage() {
 
       <Container maxWidth={false} sx={{ height: 1 }}>
         <CustomBreadcrumbs
-          heading="Kanban"
+          heading="Welcome to Intelli-Kanban"
           links={[
             {
               name: 'Home',

@@ -48,6 +48,7 @@ const SignUpPage = () => {
     }else{
       toast.success(response.data.message);
       localStorage.setItem('userId', response.data.user.id);
+      localStorage.setItem('kanbanId', response.data.user.recentBoard);
       router.push("/kanban/welcome");
     }
 
