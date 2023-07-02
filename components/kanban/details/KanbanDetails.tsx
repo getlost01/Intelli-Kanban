@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
-import { Stack, Drawer, Avatar, Tooltip, Divider, TextField, Box, IconButton } from '@mui/material';
+import { Stack, Drawer, Avatar, Tooltip, Divider, TextField, Box, MenuItem, Paper, Button, InputBase, IconButton } from '@mui/material';
 // @types
 import { IKanbanCard } from '../../../@types/kanban';
 // components
@@ -11,7 +11,7 @@ import KanbanInputName from '../KanbanInputName';
 import KanbanDetailsToolbar from './KanbanDetailsToolbar';
 import KanbanContactsDialog from '../KanbanContactsDialog';
 import KanbanDetailsPrioritizes from './KanbanDetailsPrioritizes';
-import KanbanDetailsCommentInput from './KanbanDetailsCommentInput';
+import MenuPopover from '../../menu-popover';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { marksAsComplete , updateCard } from '../../../redux/slices/kanban';
@@ -50,6 +50,19 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const [taskDescription, setTaskDescription] = useState(card.description);
 
+  const [taskBreakdown, setTaskBreakdown] = useState(card.taskBreakdown);
+
+  const [taskPropmt, setTaskPropmt] = useState('');
+
+  const [openPopover, setOpenPopover] = useState<HTMLElement | null>(null);
+
+  const handleClosePopover = () => {
+    setOpenPopover(null);
+  };
+
+  const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
+    setOpenPopover(event.currentTarget);
+  };
 
   const handleLiked = () => {
     setLiked(!liked);
@@ -79,6 +92,19 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const handleChangeTaskDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskDescription(event.target.value);
+  };
+
+  const handleChangeTaskBreakdown = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTaskBreakdown(event.target.value);
+  };
+
+  const handleChangeTaskPropmt = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTaskPropmt(event.target.value);
+  };
+
+  const handleClickIdea = (value: string) => {
+    setTaskPropmt(value);
+    handleClosePopover();
   };
 
   const handleChangePrioritize = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -180,25 +206,70 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
         
           {/* GPT Generate */}
           <Stack direction="row">
-            <StyledLabel> Steps </StyledLabel>
+            <StyledLabel> Task Breakdown </StyledLabel>
 
             <TextField
               fullWidth
               multiline
               size="small"
-              value={taskDescription}
-              onChange={handleChangeTaskDescription}
+              value={taskBreakdown}
+              onChange={handleChangeTaskBreakdown}
               InputProps={{
                 sx: { typography: 'body2' },
               }}
             />
           </Stack>
 
+          <Divider />
+          <Stack direction="row" spacing={2} sx={{ py: 1, px: 2.5 }}>
+
+            <Paper variant="outlined" sx={{ p: 1, flexGrow: 1 }}>
+              <InputBase fullWidth multiline rows={2} 
+                value={taskPropmt}
+               onChange={handleChangeTaskPropmt}
+               placeholder="Write custom prompt" 
+               sx={{ px: 1 }} />
+
+              <Stack direction="row" alignItems="center">
+                <Stack direction="row" flexGrow={1}>
+                  <Tooltip title="Quick Prompts">
+                  <IconButton
+                      size="small"
+                      color={openPopover ? 'inherit' : 'default'}
+                      onClick={handleOpenPopover}
+                    >
+                      <Iconify icon="tabler:bulb-filled" />
+                    </IconButton>
+                  </Tooltip>
+
+                  <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ mt: 0, ml: 1.25 }}>
+                    <MenuItem onClick={() => handleClickIdea('Write documentation for this')}>
+                      <Iconify icon="simple-line-icons:docs" />
+                        Write documentation for this
+                    </MenuItem>
+                    <MenuItem onClick={() => handleClickIdea('Explain this in brief')}>
+                      <Iconify icon="material-symbols:waves" />
+                        Explain this in brief
+                    </MenuItem>
+                    <MenuItem onClick={() => handleClickIdea('Steps require for this')}>
+                      <Iconify icon="ri:list-unordered" />
+                        Steps require for this
+                    </MenuItem>
+                    <MenuItem onClick={() => handleClickIdea('Determine the subtasks for this')}>
+                      <Iconify icon="vaadin:split" />
+                        Determine the subtasks for this
+                    </MenuItem>
+                </MenuPopover>
+
+                </Stack>
+
+                <Button variant="contained">Generate</Button>
+              </Stack>
+            </Paper>
+            </Stack>
+
+  
         </Stack>
-
-      <Divider />
-
-      <KanbanDetailsCommentInput />
     </Drawer>
   );
 }
