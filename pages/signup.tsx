@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   Container,
   Typography,
@@ -6,25 +7,28 @@ import {
   Button,
   Card,
   Grid,
+  Link,
   Chip,
   Avatar,
 } from '@mui/material';
 
+import axios from "../src/utils/axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 interface SignupForm {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  avatar: string;
 }
 
 const SignUpPage = () => {
+  const router = useRouter();
   const [signupForm, setSignupForm] = useState<SignupForm>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    avatar: '',
   });
 
   const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,10 +39,19 @@ const SignUpPage = () => {
     }));
   };
 
-  const handleSignupSubmit = (e: React.FormEvent) => {
+  const handleSignupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Signup Form:', signupForm);
-    // Perform signup logic here
+
+    const response = await axios.post('/api/user/signup', signupForm);
+    if(response.data.error){
+      toast.error(response.data.message);
+    }else{
+      toast.success(response.data.message);
+      localStorage.setItem('userId', response.data.user.id);
+      router.push("/kanban");
+    }
+
+
   };
 
   return (
@@ -51,13 +64,22 @@ const SignUpPage = () => {
         background: "linear-gradient(to left, #2a8b8b, #02a16f)"}}
     >
     <Card sx={{ p: 4, my: 3, maxWidth: "40rem", height: "min-content"}}>
-        <Grid display={"flex"}  justifyContent={"center"}>
-            <Chip label="Signup to Intelli-Kanban" sx={{mb: 4, fontSize: "1rem"}} />
+          <Grid display={"flex"} alignItems={"center"} mb={4} justifyContent={"center"}>
+            <Link href="/signup">
+              <Chip label="Signup" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+            </Link>
+            or
+            <Link href="/login" >
+              <Chip label="Login" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+            </Link>
         </Grid>
+        <ToastContainer />
+
         <form onSubmit={handleSignupSubmit}>
             <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
                 <TextField
+                required = {true}
                 type="text"
                 name="firstName"
                 label="First Name"
@@ -68,6 +90,7 @@ const SignUpPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
                 <TextField
+                required = {true}
                 type="text"
                 name="lastName"
                 label="Last Name"
@@ -78,6 +101,7 @@ const SignUpPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <TextField
+                required = {true}
                 type="email"
                 name="email"
                 label="Email"
@@ -88,21 +112,12 @@ const SignUpPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <TextField
+                required = {true}
                 type="password"
                 name="password"
                 label="Password"
                 fullWidth
                 value={signupForm.password}
-                onChange={handleSignupChange}
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                type="text"
-                name="avatar"
-                label="Avatar"
-                fullWidth
-                value={signupForm.avatar}
                 onChange={handleSignupChange}
                 />
             </Grid>
