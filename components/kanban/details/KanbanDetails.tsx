@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import axios from 'axios';
+import axios from '../../../src/utils/axios';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { Stack, Drawer, Avatar, Tooltip, Divider, TextField, Box, CircularProgress, MenuItem, Paper, Button, InputBase, IconButton } from '@mui/material';
@@ -16,6 +16,8 @@ import MenuPopover from '../../menu-popover';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
 import { marksAsComplete , updateCard } from '../../../redux/slices/kanban';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // ----------------------------------------------------------------------
 
@@ -59,6 +61,8 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const [promptLoading, setPromptLoading] = useState(false);
 
+  const [uploadingLoad, setUploadingLoad] = useState(false);
+
   const [currentMessage, setCurrentMessage] = useState('');
 
   const handleClosePopover = () => {
@@ -91,7 +95,7 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
     try{
       setPromptLoading(true);
       setTaskBreakdown('Thinking...');
-      const response = await axios.post('http://localhost:8000/api/chat', {prompts: `${taskPropmt} ${taskDescription}`});
+      const response = await axios.post('/api/chat', {prompts: `${taskPropmt} ${taskDescription}`});
       const text = response.data.data;
       let index = 0
       let textTillNow = '';
@@ -106,7 +110,8 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
             }
         }, 20);
     } catch (error) {
-      
+      console.log(error);
+      setPromptLoading(false);
     }
   }
 
@@ -129,6 +134,24 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const handleChangeTaskPropmt = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskPropmt(event.target.value);
+  };
+
+  const handelUploadTask = () => {
+      setUploadingLoad(true);
+      axios.put(`/api/card/${card.id}`,{
+        name: taskName,
+        description: taskDescription,
+        assignee: card.assignee,
+        taskBreakdown: taskBreakdown,
+        completed: completed,
+        priority: prioritize,
+      }).then((response) => {
+        setUploadingLoad(false);
+        toast.success(response.data.message);
+      }).catch((error) => {;
+        setUploadingLoad(false);
+        toast.error('something went wrong');
+      });
   };
 
   const handleClickIdea = (value: string) => {
@@ -165,7 +188,7 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
         onCompleted={handleCompleted}
         onCloseDetails={onCloseDetails}
       />
-
+      <ToastContainer />
       <Divider />
 
         <Stack spacing={3} sx={{ px: 2.5, pt: 3, pb: 5 }}>
@@ -302,6 +325,16 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
               </Stack>
             </Paper>
             </Stack>
+
+            <Divider/>
+
+            <Button variant="contained" 
+                  onClick={handelUploadTask}
+                  disabled={uploadingLoad}
+                  startIcon={uploadingLoad && <CircularProgress size={20} color='inherit' />}
+                  >
+                  {uploadingLoad ? 'Updating...' :  'Update on Database' }
+            </Button>
 
   
         </Stack>
