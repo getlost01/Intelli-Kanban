@@ -1,0 +1,245 @@
+{
+    "board": {
+        "cards": [
+            {
+                "id": "deb02f04-9cf8-4f1e-97e0-2fbda84cc6b3",
+                "name": "Call with sales of HubSpot",
+                "description": "Duis condimentum lacus finibus felis pellentesque, ac auctor nibh fermentum. Duis sed dui ante. Phasellus id eros tincidunt, dictum lorem vitae, pellentesque sem. Aenean eu enim sit amet mauris rhoncus mollis. Sed enim turpis, porta a felis et, luctus faucibus nisi. Phasellus et metus fermentum, ultrices arcu aliquam, facilisis justo. Cras nunc nunc, elementum sed euismod ut, maximus eget nibh. Phasellus condimentum lorem neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce sagittis pharetra eleifend. Suspendisse potenti.",
+                "assignee": [
+                    {
+                        "id": "473d2720-341c-49bf-94ed-556999cf6ef7",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_2.jpg",
+                        "name": "Lucian Obrien"
+                    }
+                ],
+                "due": [
+                    1688740848405,
+                    1688827248405
+                ],
+                "attachments": [],
+                "comments": [
+                    {
+                        "id": "7e9a2d84-3303-44ec-8ba5-f46533bf22df",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_1.jpg",
+                        "name": "Jayvion Simon",
+                        "createdAt": "2023-07-01T14:40:48.406Z",
+                        "messageType": "text",
+                        "message": "Assumenda nam repudiandae rerum fugiat vel maxime."
+                    },
+                    {
+                        "id": "069aee78-28f8-4d57-96fc-7d6f5797277e",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_2.jpg",
+                        "name": "Lucian Obrien",
+                        "createdAt": "2023-06-30T13:40:48.406Z",
+                        "messageType": "text",
+                        "message": "Quis veniam aut saepe aliquid nulla."
+                    },
+                    {
+                        "id": "7623b717-3a1f-416c-88e9-10c2fd97dd16",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_3.jpg",
+                        "name": "Deja Brady",
+                        "createdAt": "2023-06-29T12:40:48.408Z",
+                        "messageType": "text",
+                        "message": "Reprehenderit ut voluptas sapiente ratione nostrum est."
+                    },
+                    {
+                        "id": "a16e6c99-99ec-43a4-8a77-abcc7350c991",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_4.jpg",
+                        "name": "Harrison Stein",
+                        "createdAt": "2023-06-28T11:40:48.408Z",
+                        "messageType": "image",
+                        "message": "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_7.jpg"
+                    },
+                    {
+                        "id": "609971a6-2ecc-49c3-8f98-8e86c11464c0",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_5.jpg",
+                        "name": "Reece Chung",
+                        "createdAt": "2023-06-27T10:40:48.408Z",
+                        "messageType": "text",
+                        "message": "Quo quia sit nihil nemo doloremque et."
+                    },
+                    {
+                        "id": "840594f4-d575-4c7e-86bf-28a642412dc3",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_6.jpg",
+                        "name": "Lainey Davidson",
+                        "createdAt": "2023-06-26T09:40:48.408Z",
+                        "messageType": "image",
+                        "message": "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_9.jpg"
+                    },
+                    {
+                        "id": "e8cded13-4b27-4f26-abdf-bda82c67b541",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_7.jpg",
+                        "name": "Cristopher Cardenas",
+                        "createdAt": "2023-06-25T08:40:48.408Z",
+                        "messageType": "text",
+                        "message": "Tempora officiis consequuntur architecto nostrum autem nam adipisci."
+                    },
+                    {
+                        "id": "2bb6adec-4acb-407a-8f45-902aade3e5f9",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_8.jpg",
+                        "name": "Melanie Noble",
+                        "createdAt": "2023-06-24T07:40:48.408Z",
+                        "messageType": "text",
+                        "message": "Voluptas sunt magni adipisci praesentium saepe."
+                    }
+                ],
+                "completed": true
+            },
+            {
+                "id": "98bf6e8b-becc-485b-9c3f-a7d09392c48d",
+                "name": "Interview for the Asis. Sales Manager",
+                "description": "We are looking for vue experience and of course node js strong knowledge",
+                "assignee": [
+                    {
+                        "id": "473d2720-341c-49bf-94ed-556999cf6ef7",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_2.jpg",
+                        "name": "Deja Brady"
+                    },
+                    {
+                        "id": "b8395203-887c-46f5-a85f-339b2d75c98b",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_3.jpg",
+                        "name": "Harrison Stein"
+                    },
+                    {
+                        "id": "18e23ac9-c874-43e4-8163-2d37f15f3367",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_4.jpg",
+                        "name": "Reece Chung"
+                    },
+                    {
+                        "id": "a3be5485-03bf-47a6-b553-a9cf9f070ed8",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_5.jpg",
+                        "name": "Lainey Davidson"
+                    },
+                    {
+                        "id": "048f6343-7a65-4873-a570-eb6ff4eb1ba3",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_6.jpg",
+                        "name": "Cristopher Cardenas"
+                    }
+                ],
+                "due": [
+                    1688740848405,
+                    1688827248405
+                ],
+                "attachments": [
+                    "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_2.jpg"
+                ],
+                "comments": [],
+                "completed": false
+            },
+            {
+                "id": "99fbc02c-de89-4be3-9515-f8bd12227d38",
+                "name": "Change the height of the top bar because it looks too chunky",
+                "description": "We nede to make it aggressive with pricing because it’s in their interest to acquire us",
+                "assignee": [],
+                "due": [
+                    null,
+                    null
+                ],
+                "attachments": [],
+                "comments": [],
+                "completed": true
+            },
+            {
+                "id": "ab9cebca-6cb4-4847-aa17-3b261b3dd0fb",
+                "name": "Integrate Stripe API",
+                "description": "We nede to make it aggresive with pricing because it’s in their interest to acquire us",
+                "assignee": [
+                    {
+                        "id": "b8395203-887c-46f5-a85f-339b2d75c98b",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_3.jpg",
+                        "name": "Melanie Noble"
+                    },
+                    {
+                        "id": "a3be5485-03bf-47a6-b553-a9cf9f070ed8",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_6.jpg",
+                        "name": "Chase Day"
+                    }
+                ],
+                "due": [
+                    null,
+                    null
+                ],
+                "attachments": [
+                    "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_4.jpg"
+                ],
+                "comments": [],
+                "completed": false
+            },
+            {
+                "id": "ebf0d26a-78e5-414f-986f-003d8fcd3154",
+                "name": "Update the customer API for payments",
+                "description": "We need to make it aggresive with pricing because it’s in their interest to acquire us",
+                "assignee": [
+                    {
+                        "id": "473d2720-341c-49bf-94ed-556999cf6ef7",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_2.jpg",
+                        "name": "Shawn Manning"
+                    }
+                ],
+                "due": [
+                    null,
+                    null
+                ],
+                "attachments": [],
+                "comments": [],
+                "completed": true
+            },
+            {
+                "id": "9d98ce30-3c51-4de3-8537-7a4b663ee3af",
+                "name": "Release minimals DS",
+                "description": "Production",
+                "assignee": [
+                    {
+                        "id": "473d2720-341c-49bf-94ed-556999cf6ef7",
+                        "avatar": "https://api-dev-minimal-v4.vercel.app/assets/images/avatars/avatar_2.jpg",
+                        "name": "Soren Durham"
+                    }
+                ],
+                "due": [
+                    null,
+                    null
+                ],
+                "attachments": [],
+                "comments": [],
+                "completed": true
+            }
+        ],
+        "columns": [
+            {
+                "id": "8cd887ec-b3bc-11eb-8529-0242ac130003",
+                "name": "Backlog",
+                "cardIds": [
+                    "deb02f04-9cf8-4f1e-97e0-2fbda84cc6b3",
+                    "98bf6e8b-becc-485b-9c3f-a7d09392c48d",
+                    "99fbc02c-de89-4be3-9515-f8bd12227d38"
+                ]
+            },
+            {
+                "id": "23008a1f-ad94-4771-b85c-3566755afab7",
+                "name": "Progress",
+                "cardIds": [
+                    "ab9cebca-6cb4-4847-aa17-3b261b3dd0fb",
+                    "ebf0d26a-78e5-414f-986f-003d8fcd3154"
+                ]
+            },
+            {
+                "id": "37a9a747-f732-4587-a866-88d51c037641",
+                "name": "Q&A",
+                "cardIds": []
+            },
+            {
+                "id": "4ac3cd37-b3e1-466a-8e3b-d7d88f6f5d4f",
+                "name": "Production",
+                "cardIds": [
+                    "9d98ce30-3c51-4de3-8537-7a4b663ee3af"
+                ]
+            }
+        ],
+        "columnOrder": [
+            "8cd887ec-b3bc-11eb-8529-0242ac130003",
+            "23008a1f-ad94-4771-b85c-3566755afab7",
+            "37a9a747-f732-4587-a866-88d51c037641",
+            "4ac3cd37-b3e1-466a-8e3b-d7d88f6f5d4f"
+        ]
+    }
+}

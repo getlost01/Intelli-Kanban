@@ -1,6 +1,7 @@
 import omit from 'lodash/omit';
 import keyBy from 'lodash/keyBy';
 import { createSlice, Dispatch } from '@reduxjs/toolkit';
+import { useRouter } from 'next/router';
 // utils
 import axios from '../../src/utils/axios';
 // @types
@@ -25,6 +26,10 @@ const slice = createSlice({
     // START LOADING
     startLoading(state) {
       state.isLoading = true;
+    },
+
+    stopLoading(state) {
+      state.isLoading = false;
     },
 
     // HAS ERROR
@@ -126,14 +131,16 @@ export const { actions } = slice;
 
 // ----------------------------------------------------------------------
 
-export function getBoard() {
+export function getBoard(kanbanId: string) {;
   return async (dispatch: Dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/api/kanban/board');
-      dispatch(slice.actions.getBoardSuccess(response.data.board));
+      const response = await axios.get(`api/board/${kanbanId}`);
+      dispatch(slice.actions.getBoardSuccess(response.data.boarddata.board));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
+    } finally {
+      dispatch(slice.actions.stopLoading());
     }
   };
 }
