@@ -51,7 +51,6 @@ const SignUpPage = () => {
       router.push("/kanban");
     }
 
-
   };
 
   return (

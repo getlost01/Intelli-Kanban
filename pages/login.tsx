@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Typography, Chip, Card, TextField, Button, Grid } from '@mui/material';
+import { Container, Link, Chip, Card, TextField, Button, Grid } from '@mui/material';
+// utils
+import axios from '../src/utils/axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 interface LoginForm {
   email: string;
@@ -7,6 +12,7 @@ interface LoginForm {
 }
 
 const LoginPage = () => {
+  const router = useRouter();
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: '',
     password: '',
@@ -20,10 +26,16 @@ const LoginPage = () => {
     }));
   };
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login Form:', loginForm);
-    // Perform login logic here
+    const response = await axios.post('/api/user/login', loginForm);
+    if(response.data.error){
+      toast.error(response.data.message);
+    }else{
+      toast.success(response.data.message);
+      localStorage.setItem('userId', response.data.user.id);
+      router.push("/kanban");
+    }
   };
 
   return (
@@ -36,14 +48,23 @@ const LoginPage = () => {
         background: "linear-gradient(to left, #2a8b8b, #02a16f)"}}
     >
     <Card sx={{ p: 4, my: 3, maxWidth: "40rem", height: "min-content"}}>
-        <Grid display={"flex"}  justifyContent={"center"}>
-            <Chip label="Login to Intelli-Kanban" sx={{mb: 4, fontSize: "1rem"}} />
+    <Grid display={"flex"} alignItems={"center"} mb={4} justifyContent={"center"}>
+            <Link href="/signup">
+              <Chip label="Signup" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+            </Link>
+            or
+            <Link href="/login" >
+              <Chip label="Login" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+            </Link>
         </Grid>
+
+        <ToastContainer />
 
       <form onSubmit={handleLoginSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
+              required = {true}
               type="email"
               name="email"
               label="Email"
@@ -54,6 +75,7 @@ const LoginPage = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+            required = {true}
               type="password"
               name="password"
               label="Password"
