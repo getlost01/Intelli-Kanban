@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
+import axios from 'axios';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
-import { Stack, Drawer, Avatar, Tooltip, Divider, TextField, Box, MenuItem, Paper, Button, InputBase, IconButton } from '@mui/material';
+import { Stack, Drawer, Avatar, Tooltip, Divider, TextField, Box, CircularProgress, MenuItem, Paper, Button, InputBase, IconButton } from '@mui/material';
 // @types
 import { IKanbanCard } from '../../../@types/kanban';
 // components
@@ -56,6 +57,10 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const [openPopover, setOpenPopover] = useState<HTMLElement | null>(null);
 
+  const [promptLoading, setPromptLoading] = useState(false);
+
+  const [currentMessage, setCurrentMessage] = useState('');
+
   const handleClosePopover = () => {
     setOpenPopover(null);
   };
@@ -80,6 +85,30 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
   const handleCloseContacts = () => {
     setOpenContacts(false);
   };
+
+  
+  const handleGeneratePrompt = async() => {
+    try{
+      setPromptLoading(true);
+      setTaskBreakdown('Thinking...');
+      const response = await axios.post('http://localhost:8000/api/chat', {prompts: `${taskPropmt} ${taskDescription}`});
+      const text = response.data.data;
+      let index = 0
+      let textTillNow = '';
+      let interval = setInterval(() => {
+            if (index < text.length) {
+                textTillNow += text[index];
+                setTaskBreakdown(textTillNow);
+                index++
+            } else {
+                setPromptLoading(false);
+                clearInterval(interval)
+            }
+        }, 20);
+    } catch (error) {
+      
+    }
+  }
 
   const handleClickAttach = () => {
     fileInputRef.current?.click();
@@ -263,7 +292,13 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
                 </Stack>
 
-                <Button variant="contained">Generate</Button>
+                <Button variant="contained" 
+                  onClick={handleGeneratePrompt}
+                  disabled={taskPropmt === '' || promptLoading}
+                  startIcon={promptLoading && <CircularProgress size={20} color='inherit' />}
+                  >
+                  {promptLoading ? 'Thinking...' :  'Task breakdown' }
+                </Button>
               </Stack>
             </Paper>
             </Stack>
