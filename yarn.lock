@@ -2719,7 +2719,12 @@
   dependencies:
     "cssjanus" "^2.0.1"
 
-"stylis@4.2.0", "stylis@4.x":
+"stylis@^4.3.0", "stylis@4.x":
+  "integrity" "sha512-E87pIogpwUsUwXw7dNyU4QDjdgVMy52m+XEOPEKUn161cCzWjjhPSQhByfd1CcNvrOLnXQ6OnnZDwnJrz/Z4YQ=="
+  "resolved" "https://registry.npmjs.org/stylis/-/stylis-4.3.0.tgz"
+  "version" "4.3.0"
+
+"stylis@4.2.0":
   "integrity" "sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw=="
   "resolved" "https://registry.npmjs.org/stylis/-/stylis-4.2.0.tgz"
   "version" "4.2.0"

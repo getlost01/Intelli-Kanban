@@ -28,7 +28,6 @@ export type IKanbanCard = {
   description?: string;
   assignee: IKanbanAssignee[];
   taskBreakdown: string;
-  attachments: string[];
   completed: boolean;
 };
 

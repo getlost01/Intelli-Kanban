@@ -55,6 +55,7 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }: Props) {
           ...defaultTask,
           id: uuidv4(),
           name,
+          taskBreakdown: '',
           completed,
         });
       }
@@ -67,6 +68,7 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }: Props) {
         ...defaultTask,
         id: uuidv4(),
         name,
+        taskBreakdown: '',
         completed,
       });
     } else {

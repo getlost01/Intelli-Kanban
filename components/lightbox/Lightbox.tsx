@@ -49,13 +49,13 @@ export default function Lightbox({
           disabledThumbnails,
           disabledFullscreen,
         })}
-        on={{
-          view: (index: number) => {
-            if (onGetCurrentIndex) {
-              onGetCurrentIndex(index);
-            }
-          },
-        }}
+        // on={{
+        //   view: (index: number) => {
+        //     if (onGetCurrentIndex) {
+        //       onGetCurrentIndex(index);
+        //     }
+        //   },
+        // }}
         toolbar={{
           buttons: [
             <DisplayTotal
