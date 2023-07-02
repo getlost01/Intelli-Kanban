@@ -6,4 +6,3 @@ export { default as KanbanColumnToolBar } from './column/KanbanColumnToolBar';
 
 export { default as KanbanDetails } from './details/KanbanDetails';
 export { default as KanbanDetailsToolbar } from './details/KanbanDetailsToolbar';
-export { default as KanbanDetailsCommentInput } from './details/KanbanDetailsCommentInput';
