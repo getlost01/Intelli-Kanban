@@ -108,7 +108,9 @@ export default function KanbanTaskAdd({ onAddTask, onCloseAddTask }: Props) {
             </Tooltip>
 
             <Stack direction="row" spacing={1.5} alignItems="center">
-              <Tooltip title="Assign" onClick={handleOpenContacts}>
+              <Tooltip title="Assign feature, under developing"
+              //  onClick={handleOpenContacts}
+               >
                 <IconButton size="small">
                   <Iconify icon="eva:people-fill" />
                 </IconButton>

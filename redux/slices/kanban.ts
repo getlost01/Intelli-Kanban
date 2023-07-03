@@ -148,6 +148,14 @@ const slice = createSlice({
         axios.post('/api/board/update', { id: state.boardId, board: state.board  });
       },
 
+      // Update Card
+      updateColumnName(state, action) {
+          var { columnId , newName } = action.payload;
+          state.board.columns[columnId].name = newName;
+          console.log(newName);
+          axios.post('/api/board/update', { id: state.boardId, board: state.board  });
+      },
+
   },
 });
 
@@ -269,5 +277,13 @@ export function updateTask({ card, name, description, assignee, taskBreakdown, c
 export function updateCard({ card , taskName }: { card: Partial<IKanbanCard>; taskName: string }) {
   return (dispatch: Dispatch) => {
     dispatch(slice.actions.updateCard({ card ,taskName }));
+  };
+}
+
+// ----------------------------------------------------------------------
+
+export function updateColumnName({ columnId , newName }: { columnId: string; newName: string }) {
+  return (dispatch: Dispatch) => {
+    dispatch(slice.actions.updateColumnName({ columnId ,newName }));
   };
 }

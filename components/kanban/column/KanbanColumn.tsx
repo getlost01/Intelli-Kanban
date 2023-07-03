@@ -99,6 +99,7 @@ export default function KanbanColumn({ column, index, cards }: Props) {
         >
           <Stack spacing={3} {...provided.dragHandleProps}>
             <KanbanColumnToolBar
+              columnId={column.id}
               columnName={column.name}
               onDelete={handleDeleteColumn}
               onUpdate={handleUpdateColumn}

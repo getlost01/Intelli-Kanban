@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 // @mui
-import { Stack, MenuItem, IconButton, Button, Box } from '@mui/material';
+import { Stack, MenuItem, IconButton, Tooltip,Button, Box } from '@mui/material';
 // components
 import Iconify from '../../iconify';
 import MenuPopover from '../../menu-popover';
@@ -8,19 +8,24 @@ import ConfirmDialog from '../../confirm-dialog';
 //
 import KanbanInputName from '../KanbanInputName';
 // Redux
-// import { useDispatch } from '../../../redux/store';
-// import { updateColumnName } from '../../../redux/slices/kanban';
+import { useDispatch } from '../../../redux/store';
+import { updateColumnName } from '../../../redux/slices/kanban';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // ----------------------------------------------------------------------
 
 type Props = {
+  columnId: string;
   columnName: string;
   onDelete: VoidFunction;
   onUpdate: (name: string) => void;
 };
 
-export default function KanbanColumnToolBar({ columnName, onDelete, onUpdate }: Props) {
+export default function KanbanColumnToolBar({ columnName, columnId, onDelete, onUpdate }: Props) {
   const renameRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const [value, setValue] = useState(columnName);
 
@@ -59,8 +64,12 @@ export default function KanbanColumnToolBar({ columnName, onDelete, onUpdate }: 
   };
 
   const handleChangeColumnName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // dispatch(updateColumnNamw({ name }));
     setValue(event.target.value);
+  };
+
+  const handleRenameColumn = () => {
+    toast.success('Rename done.');
+    dispatch(updateColumnName({ columnId , newName: value }));
   };
 
   const handleUpdateColumn = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -84,8 +93,20 @@ export default function KanbanColumnToolBar({ columnName, onDelete, onUpdate }: 
           placeholder="Section name"
           value={value}
           onChange={handleChangeColumnName}
-          onKeyUp={handleUpdateColumn}
+          // onKeyUp={handleUpdateColumn}
         />
+
+        <Tooltip title="Click here to apply rename.">
+            <IconButton
+              size="small"
+              color={openPopover ? 'inherit' : 'default'}
+              onClick={handleRenameColumn}
+            >
+                <Iconify icon="mdi:rename-box" />
+            </IconButton>
+        </Tooltip>
+
+      <ToastContainer/>
 
         <IconButton
           size="small"
@@ -104,7 +125,7 @@ export default function KanbanColumnToolBar({ columnName, onDelete, onUpdate }: 
           }}
           sx={{ color: 'error.main' }}
         >
-          <Iconify icon="eva:trash-2-outline" />
+        <Iconify icon="eva:trash-2-outline" />
           Delete section
         </MenuItem>
 

@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import axios from '../../../src/utils/axios';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
-import { Stack, Drawer, Avatar, Tooltip, Divider, TextField, Box, CircularProgress, MenuItem, Paper, Button, InputBase, IconButton } from '@mui/material';
+import { Stack, Drawer, Avatar, Tooltip, Grid, Divider, TextField, Box, CircularProgress, MenuItem, Paper, Button, InputBase, IconButton } from '@mui/material';
 // @types
 import { IKanbanCard } from '../../../@types/kanban';
 // components
@@ -120,7 +120,6 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
   };
 
   const handleChangeTaskName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateCard({card, taskName: event.target.value}));
     setTaskName(event.target.value);
   };
 
@@ -154,6 +153,11 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
   const handleClickIdea = (value: string) => {
     setTaskPropmt(value);
     handleClosePopover();
+  };
+
+  const handleRenameTaskName = () => {
+    toast.success('Rename done.');
+    dispatch(updateCard({card, taskName: taskName}));
   };
 
   const handleChangePrioritize = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -190,11 +194,24 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
         <Stack spacing={3} sx={{ px: 2.5, pt: 3, pb: 5 }}>
           {/* Task name */}
-          <KanbanInputName
-            placeholder="Task name"
-            value={taskName}
-            onChange={handleChangeTaskName}
-          />
+          <Grid>
+            <KanbanInputName
+              placeholder="Task name"
+              value={taskName}
+              onChange={handleChangeTaskName}
+              sx={{width: `calc(100% - 3rem)`}}
+            />
+
+            <Tooltip title="Click here to apply rename.">
+                <IconButton
+                  size="small"
+                  color={openPopover ? 'inherit' : 'default'}
+                  onClick={handleRenameTaskName}
+                >
+                    <Iconify icon="mdi:rename-box" />
+                </IconButton>
+            </Tooltip>
+          </Grid>
 
           {/* Assignee */}
           <Stack direction="row">
