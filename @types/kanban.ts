@@ -29,6 +29,7 @@ export type IKanbanCard = {
   assignee: IKanbanAssignee[];
   taskBreakdown: string;
   completed: boolean;
+  priority: string;
 };
 
 export type IKanbanColumn = {

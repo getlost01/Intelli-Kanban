@@ -15,7 +15,7 @@ import KanbanDetailsPrioritizes from './KanbanDetailsPrioritizes';
 import MenuPopover from '../../menu-popover';
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { marksAsComplete , updateCard } from '../../../redux/slices/kanban';
+import { marksAsComplete , updateCard, updateTask } from '../../../redux/slices/kanban';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -43,7 +43,7 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const [liked, setLiked] = useState(false);
 
-  const [prioritize, setPrioritize] = useState('low');
+  const [priority, setPriority] = useState(card.priority || 'low' );
 
   const [taskName, setTaskName] = useState(card.name);
 
@@ -138,20 +138,17 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
 
   const handelUploadTask = () => {
       setUploadingLoad(true);
-      axios.put(`/api/card/${card.id}`,{
+      dispatch(updateTask({
+        card, 
         name: taskName,
         description: taskDescription,
         assignee: card.assignee,
         taskBreakdown: taskBreakdown,
         completed: completed,
-        priority: prioritize,
-      }).then((response) => {
-        setUploadingLoad(false);
-        toast.success(response.data.message);
-      }).catch((error) => {;
-        setUploadingLoad(false);
-        toast.error('something went wrong');
-      });
+        priority: priority,
+      }));
+      toast.info("Update request sent successfully");
+      setUploadingLoad(false); 
   };
 
   const handleClickIdea = (value: string) => {
@@ -160,7 +157,7 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
   };
 
   const handleChangePrioritize = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPrioritize((event.target as HTMLInputElement).value);
+    setPriority((event.target as HTMLInputElement).value);
   };
 
   return (
@@ -235,7 +232,7 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
             <StyledLabel>Prioritize</StyledLabel>
 
             <KanbanDetailsPrioritizes
-              prioritize={prioritize}
+              prioritize={priority}
               onChangePrioritize={handleChangePrioritize}
             />
           </Stack>

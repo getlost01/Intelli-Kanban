@@ -129,6 +129,18 @@ const slice = createSlice({
         axios.post('/api/board/update', { id: state.boardId, board: state.board  });
       },
 
+      // Update Task
+      updateTask(state, action) {
+          var { card, name, description, assignee, taskBreakdown, completed, priority} = action.payload;
+          state.board.cards[card.id].description = description;
+          state.board.cards[card.id].name = name;
+          state.board.cards[card.id].assignee = assignee;
+          state.board.cards[card.id].taskBreakdown = taskBreakdown;
+          state.board.cards[card.id].completed = completed;
+          state.board.cards[card.id].priority = priority;
+          axios.post('/api/board/update', { id: state.boardId, board: state.board  });
+      },
+
       // Update Card
       updateCard(state, action) {
         var { card , taskName } = action.payload;
@@ -243,6 +255,13 @@ export function deleteTask({ cardId, columnId }: { cardId: string; columnId: str
 export function marksAsComplete({ card }: { card: Partial<IKanbanCard> }) {
   return (dispatch: Dispatch) => {
     dispatch(slice.actions.marksAsComplete({ card }));
+  };
+}
+
+// ----------------------------------------------------------------------
+export function updateTask({ card, name, description, assignee, taskBreakdown, completed, priority }: { card: Partial<IKanbanCard>; name: string; description: any; assignee: any; taskBreakdown: string; completed: boolean; priority: string }) {
+  return (dispatch: Dispatch) => {
+    dispatch(slice.actions.updateTask({ card, name, description, assignee, taskBreakdown, completed, priority }));
   };
 }
 
