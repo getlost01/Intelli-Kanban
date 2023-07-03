@@ -179,7 +179,7 @@ export function createColumn(newColumn: { name: string }) {
   return async (dispatch: Dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/api/kanban/columns/new', newColumn);
+      const response = await axios.post('/api/column/create', newColumn);
       dispatch(slice.actions.createColumnSuccess(response.data.column));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -210,7 +210,6 @@ export function deleteColumn(columnId: string) {
   return async (dispatch: Dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      await axios.post('/api/kanban/columns/delete', { columnId });
       dispatch(slice.actions.deleteColumnSuccess({ columnId }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
