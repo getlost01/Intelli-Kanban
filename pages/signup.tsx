@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import {
-  Container,
-  Typography,
   TextField,
   Button,
   Card,
   Grid,
   Link,
+  CircularProgress,
   Chip,
   Avatar,
 } from '@mui/material';
@@ -15,6 +14,7 @@ import {
 import axios from "../src/utils/axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { set } from 'date-fns';
 interface SignupForm {
   firstName: string;
   lastName: string;
@@ -24,6 +24,9 @@ interface SignupForm {
 
 const SignUpPage = () => {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [signupForm, setSignupForm] = useState<SignupForm>({
     firstName: '',
     lastName: '',
@@ -42,14 +45,20 @@ const SignUpPage = () => {
   const handleSignupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     const response = await axios.post('/api/user/signup', signupForm);
     if(response.data.error){
       toast.error(response.data.message);
+      setIsLoading(false);
     }else{
+      setTimeout(() => {
       toast.success(response.data.message);
       localStorage.setItem('userId', response.data.user.id);
       localStorage.setItem('kanbanId', response.data.user.recentBoard);
       router.push("/kanban/welcome");
+      setIsLoading(false);
+      }, 2000);
     }
 
   };
@@ -122,8 +131,11 @@ const SignUpPage = () => {
                 />
             </Grid>
             <Grid item xs={12}>
-                <Button type="submit" variant="contained" color="primary" fullWidth>
-                Sign Up
+                <Button type="submit" variant="contained" color="primary" fullWidth
+                  disabled={isLoading}
+                  startIcon={isLoading && <CircularProgress size={20} color='inherit' />}
+                  >
+                    {isLoading ? 'Loading...' :  'SignUp' }
                 </Button>
             </Grid>
             </Grid>

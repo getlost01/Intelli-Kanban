@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Link, Chip, Card, TextField, Button, Grid } from '@mui/material';
+import { CircularProgress, Link, Chip, Card, TextField, Button, Grid } from '@mui/material';
 // utils
 import axios from '../src/utils/axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,6 +13,7 @@ interface LoginForm {
 
 const LoginPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: '',
     password: '',
@@ -28,14 +29,19 @@ const LoginPage = () => {
 
   const handleLoginSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
+
+    setIsLoading(true);
+
     const response = await axios.post('/api/user/login', loginForm);
     if(response.data.error){
       toast.error(response.data.message);
+      setIsLoading(false);
     }else{
       toast.success(response.data.message);
       localStorage.setItem('userId', response.data.user.id);
       localStorage.setItem('kanbanId', response.data.user.recentBoard);
       router.push("/kanban");
+      setIsLoading(false);
     }
   };
 
@@ -86,8 +92,11 @@ const LoginPage = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Login
+            <Button type="submit" variant="contained" color="primary" fullWidth
+              disabled={isLoading}
+              startIcon={isLoading && <CircularProgress size={20} color='inherit' />}
+            >
+                {isLoading ? 'Loading...' :  'Login' }
             </Button>
           </Grid>
         </Grid>
