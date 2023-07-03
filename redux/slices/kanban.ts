@@ -37,6 +37,7 @@ const slice = createSlice({
       state.isLoading = false;
     },
 
+
     // HAS ERROR
     hasError(state, action) {
       state.isLoading = false;
@@ -67,11 +68,13 @@ const slice = createSlice({
         [newColumn.id]: newColumn,
       };
       state.board.columnOrder.push(newColumn.id);
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
 
     persistCard(state, action) {
       const columns = action.payload;
       state.board.columns = columns;
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
 
     persistColumn(state, action) {
@@ -95,6 +98,7 @@ const slice = createSlice({
       );
 
       state.board.cards = omit(state.board.cards, [cardId]);
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
 
     // UPDATE COLUMN
@@ -103,6 +107,7 @@ const slice = createSlice({
 
       state.isLoading = false;
       state.board.columns[column.id] = column;
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
 
     // DELETE COLUMN
@@ -114,18 +119,21 @@ const slice = createSlice({
       state.board.columns = omit(state.board.columns, [columnId]);
       state.board.cards = omit(state.board.cards, [...deletedColumn.cardIds]);
       state.board.columnOrder = state.board.columnOrder.filter((c) => c !== columnId);
+      axios.post('/api/board/update', { id: state.boardId, board: state.board  });
     },
     
       // MARK AS COMPLETED
       marksAsComplete(state, action) {
         var { card } = action.payload;
         state.board.cards[card.id].completed = !card.completed;
+        axios.post('/api/board/update', { id: state.boardId, board: state.board  });
       },
 
       // Update Card
       updateCard(state, action) {
         var { card , taskName } = action.payload;
         state.board.cards[card.id].name = taskName;
+        axios.post('/api/board/update', { id: state.boardId, board: state.board  });
       },
 
   },
