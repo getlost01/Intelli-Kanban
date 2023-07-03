@@ -7,6 +7,9 @@ import MenuPopover from '../../menu-popover';
 import ConfirmDialog from '../../confirm-dialog';
 //
 import KanbanInputName from '../KanbanInputName';
+// Redux
+// import { useDispatch } from '../../../redux/store';
+// import { updateColumnName } from '../../../redux/slices/kanban';
 
 // ----------------------------------------------------------------------
 
@@ -56,6 +59,7 @@ export default function KanbanColumnToolBar({ columnName, onDelete, onUpdate }: 
   };
 
   const handleChangeColumnName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // dispatch(updateColumnNamw({ name }));
     setValue(event.target.value);
   };
 

@@ -44,7 +44,7 @@ export default function KanbanColumn({ column, index, cards }: Props) {
         columnId: column.id,
       })
     );
-    toast.error('Delete success!',{autoClose: 3000});
+    toast.success('Delete success!',{autoClose: 3000});
   };
 
   const handleUpdateColumn = async (newName: string) => {
@@ -66,7 +66,7 @@ export default function KanbanColumn({ column, index, cards }: Props) {
   const handleDeleteColumn = async () => {
     try {
       dispatch(deleteColumn(column.id));
-      toast.warn('Delete success!',{autoClose: 3000});
+      toast.success('Delete success!',{autoClose: 3000});
     } catch (error) {
       console.error(error);
     }

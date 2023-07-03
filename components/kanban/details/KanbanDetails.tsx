@@ -205,9 +205,9 @@ export default function KanbanDetails({ card, openDetails, onCloseDetails, onDel
                 <Avatar key={user.id} alt={user.name} src={user.avatar} sx={{ m: 0.5 }} />
               ))}
 
-              <Tooltip title="Add assignee">
+              <Tooltip title="Add assignee ( Working on logic, stay tuned for this feature)">
                 <IconButton
-                  onClick={handleOpenContacts}
+                  // onClick={handleOpenContacts}
                   sx={{
                     p: 1,
                     ml: 0.5,

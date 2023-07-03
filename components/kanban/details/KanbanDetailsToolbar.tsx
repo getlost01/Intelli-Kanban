@@ -66,7 +66,7 @@ export default function KanbanDetailsToolbar({
         </Button>
 
         <Stack direction="row" spacing={1} justifyContent="flex-end" flexGrow={1}>
-          <Tooltip title="Like this">
+          <Tooltip title="Like for show only (no prior usage)">
             <IconButton color={liked ? 'default' : 'primary'} size="small" onClick={onLike}>
               <Iconify icon="ic:round-thumb-up" />
             </IconButton>

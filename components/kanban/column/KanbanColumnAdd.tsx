@@ -5,6 +5,8 @@ import { Paper, Button, ClickAwayListener, TextField } from '@mui/material';
 import { useDispatch } from '../../../redux/store';
 import { createColumn } from '../../../redux/slices/kanban';
 // components
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Iconify from '../../iconify';
 
 // ----------------------------------------------------------------------
@@ -34,6 +36,7 @@ export default function KanbanColumnAdd() {
         dispatch(createColumn({ name }));
         setName('');
       }
+      toast.success('Column Created!',{autoClose: 3000});
       handleClose();
     } catch (error) {
       console.error(error);

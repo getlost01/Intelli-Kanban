@@ -60,13 +60,13 @@ export default function KanbanPage() {
     if(!kanbanId){
       router.push("/404");
     }
-    console.log(kanbanId);
+    // console.log(kanbanId);
     dispatch(getBoard(kanbanId));
   }, [dispatch]);
 
 
   const onDragEnd = (result: DropResult) => {
-    toast.success('Drag and Drop Success');
+    toast.success('Drag and Drop done Successfully');
     const { destination, source, draggableId, type } = result;
 
     if (!destination) return;
