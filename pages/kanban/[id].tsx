@@ -216,12 +216,12 @@ const NAV_ITEMS = [
     items: [
       {
         title: 'Github',
-        path: 'https://github.com/getlost01',
+        path: 'https://github.com/',
         icon: <Iconify icon="bi:github" />,
       },
       {
         title: 'Linkedin',
-        path: 'https://www.linkedin.com/in/aagam-jain-gl01/',
+        path: 'https://www.linkedin.com/in/',
         icon: <Iconify icon="circum:linkedin" />,
       },
       {

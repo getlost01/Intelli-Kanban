@@ -15,8 +15,8 @@ const LoginPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [loginForm, setLoginForm] = useState<LoginForm>({
-    email: '',
-    password: '',
+    email: 'demo@intellikanban.com',
+    password: 'demo1234',
   });
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,11 +57,11 @@ const LoginPage = () => {
     <Card sx={{ p: 4, my: 3, maxWidth: "40rem", height: "min-content"}}>
     <Grid display={"flex"} alignItems={"center"} mb={4} justifyContent={"center"}>
             <Link href="/signup">
-              <Chip label="Signup" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+              <Chip label="Signup" sx={{ mx: 1, p: 2, fontSize: "1rem", cursor: "pointer"}} />
             </Link>
             or
             <Link href="/login" >
-              <Chip label="Login" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+              <Chip label="Login" sx={{ mx: 1, p: 2, fontSize: "1rem", cursor: "pointer"}} color='primary' />
             </Link>
         </Grid>
 

@@ -73,13 +73,13 @@ const SignUpPage = () => {
         background: "linear-gradient(to left, #2a8b8b, #02a16f)"}}
     >
     <Card sx={{ p: 4, my: 3, maxWidth: "40rem", height: "min-content"}}>
-          <Grid display={"flex"} alignItems={"center"} mb={4} justifyContent={"center"}>
+        <Grid display={"flex"} alignItems={"center"} mb={4} justifyContent={"center"}>
             <Link href="/signup">
-              <Chip label="Signup" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+              <Chip label="Signup" sx={{ mx: 1, p: 2, fontSize: "1rem", cursor: "pointer"}} color='primary' />
             </Link>
             or
             <Link href="/login" >
-              <Chip label="Login" sx={{ mx: 1, fontSize: "1rem", cursor: "pointer"}} />
+              <Chip label="Login" sx={{ mx: 1, p: 2, fontSize: "1rem", cursor: "pointer"}} />
             </Link>
         </Grid>
         <ToastContainer />
